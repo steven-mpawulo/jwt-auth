@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const signup = async (req, res) => {
     const body = req.body;
@@ -17,7 +18,11 @@ const signup = async (req, res) => {
 
         user.save().then((value) => {
             console.log(value);
-            res.status(200).json({"message": "User Created", "user": value,});
+            const token = jwt.sign({_id: value._id}, process.env.SECRETKEY, {
+                expiresIn: 60 * 60 *60
+            });
+
+            res.status(200).json({"message": "User Created", "user": value, token: token});
         }).catch((e) => {
             console.log(e);
             res.json({"error": e});
