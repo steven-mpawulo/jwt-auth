@@ -18,7 +18,10 @@ const signup = async (req, res) => {
         user.save().then((value) => {
             console.log(value);
             res.status(200).json({"message": "User Created", "user": value,});
-        });
+        }).catch((e) => {
+            console.log(e);
+            res.json({"error": e});
+        })
     
     }
 
