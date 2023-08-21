@@ -12,3 +12,5 @@ User.findOne({"_id": user._id}).then((value) => {
     }
 });
 }
+
+module.exports = getSingleUserController;
