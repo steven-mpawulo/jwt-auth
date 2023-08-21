@@ -9,7 +9,7 @@ const login = async (req, res) => {
     } else {
         User.findOne({email: body.email}).then(async (value) => {
             console.log(value);
-            if(value){
+            if(value !== null){
                 await bcrypt.compare(body.password, value.password, function (err, result) {
                     if (err){
                         res.status(400).json({"error": err});
@@ -22,11 +22,15 @@ const login = async (req, res) => {
                             "token": token
 
                         });
+                    } else {
+                        res.status(400).json({"message": "Password is incorrect"});
                     }
                 });
                 
+            } else {
+                res.status(400).json({"message": "Invalid credentials"});
             }
-        })
+        });
     
     }
 
