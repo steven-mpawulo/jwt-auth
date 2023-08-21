@@ -10,6 +10,6 @@ const userRouter = express.Router();
 userRouter.post('/signup', signup);
 userRouter.post('/login', login);
 userRouter.get('/users', verifyToken, getAllUsersController);
-userRouter.get('/users/:id', verifyToken, getSingleUserController);
+userRouter.get('/user', verifyToken, getSingleUserController)
 
 module.exports = userRouter;
