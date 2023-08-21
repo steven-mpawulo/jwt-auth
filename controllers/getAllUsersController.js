@@ -11,3 +11,5 @@ const getAllUsersController = async (req, res) => {
 
     });
 }
+
+module.exports = getAllUsersController;
